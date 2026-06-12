@@ -1,6 +1,5 @@
 /* @AUTHOR : ISMAIL */
 
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; } /* reset std browser margins/paddings enz */
 /* kleuren die ik gebruik */
 :root {
@@ -242,6 +241,7 @@ img { display: block; max-width: 100%; }
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     gap: 16px;
+    align-items: start;
 }
 .service-card {
     background: var(--white);
@@ -249,12 +249,17 @@ img { display: block; max-width: 100%; }
     border-radius: var(--radius-l);
     padding: 28px 22px;
     transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
-    cursor: default;
+    cursor: pointer;
 }
 .service-card:hover {
     box-shadow: 0 8px 32px rgba(10,124,110,0.1);
     transform: translateY(-2px);
     border-color: rgba(10,124,110,0.3);
+}
+.service-card.open {
+    border-color: rgba(10,124,110,0.3);
+    box-shadow: 0 8px 32px rgba(10,124,110,0.1);
+    transform: none;
 }
 .service-icon {
     width: 100%; height: 48px;
@@ -272,14 +277,60 @@ img { display: block; max-width: 100%; }
     font-size: 12px; color: var(--teal); font-weight: 500;
     margin-top: 14px;
 }
-.service-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+.service-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; transition: transform 0.25s; }
+
+/* service expand/detail */
+.service-card.open .service-link svg { transform: rotate(90deg); }
+.service-card.open .service-link { color: var(--teal-d); }
+.service-detail {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease;
+    margin-top: 0;
+}
+.service-card.open .service-detail {
+    max-height: 600px;
+    opacity: 1;
+    margin-top: 16px;
+}
+.service-detail-intro {
+    font-size: 12.5px !important;
+    color: var(--ink-2) !important;
+    margin-bottom: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+}
+.service-detail ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+.service-detail ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 13px;
+    color: var(--ink-2);
+    font-weight: 300;
+}
+.service-detail ul li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--teal);
+    border-radius: 50%;
+    margin-top: 8px;
+    flex-shrink: 0;
+}
 
 /* ── ABOUT / TEAM ── */
 .team-grid {
-   display: grid;
-   grid-template-columns: 2fr 1fr;
-   gap: 48px;
-   align-items: start;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 48px;
+    align-items: start;
 }
 
 .team-text .eyebrow { margin-bottom: 12px; }
