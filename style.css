@@ -210,7 +210,7 @@ img { display: block; max-width: 100%; }
     flex-wrap: wrap;
 }
 .trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
-.trust-item img { width: 20px; height: 20px}
+.trust-item img { width: 20px; height: 20px; }
 
 /* ── SECTIONS ── */
 .section { padding: 80px 5vw; }
